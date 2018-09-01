@@ -1,0 +1,11 @@
+[
+  "test_c1.py::test_b64_decoding",
+  "test_c2.py::test_fixed_XOR",
+  "test_c3.py::test_break_single_xor",
+  "test_c4.py::test_find_single_xor",
+  "test_c5.py::test_repeating_xor",
+  "test_c6.py::test_multi_xor_decrypt",
+  "test_c6.py::test_find_key_length",
+  "test_c7.py::test_AES_ECB_decrypt",
+  "test_scoring.py::test_hamming_distance"
+]

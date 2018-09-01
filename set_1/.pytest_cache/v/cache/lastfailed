@@ -1,0 +1,5 @@
+{
+  "test_c5.py::test_repeating_xor": true,
+  "test_c6.py::test_find_key_length": true,
+  "test_c6.py::test_multi_xor_decrypt": true
+}

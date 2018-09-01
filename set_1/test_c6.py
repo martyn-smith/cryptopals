@@ -1,7 +1,7 @@
 from scoring import freq_score, hamming_distance
 from base64 import b64decode
 from s1utils import find_key_length, break_single_xor
-import mock
+from unittest import mock
 
 def multi_xor_decrypt(ciphertxt: bytes, verbose = False):
     plaintxt = "".ljust(len(ciphertxt), " ")
