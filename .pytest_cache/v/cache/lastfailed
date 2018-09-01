@@ -1,8 +1,0 @@
-{
-  "set_1/test_c4.py::test_find_single_xor": true,
-  "set_1/test_c5.py::test_repeating_xor": true,
-  "set_1/test_c6.py::test_find_key_length": true,
-  "set_1/test_c6.py::test_multi_xor_decrypt": true,
-  "set_1/test_c7.py::test_AES_ECB_decrypt": true,
-  "set_2/test_c10.py::test_implement_cbc_mode": true
-}
