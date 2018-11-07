@@ -1,0 +1,15 @@
+{
+  "set_1/test_all.py::test_break_single_xor": true,
+  "set_1/test_all.py::test_c1": true,
+  "set_1/test_all.py::test_c2": true,
+  "set_1/test_all.py::test_find_single_xor": true,
+  "set_1/test_all.py::test_repeating_xor": true,
+  "set_1/test_all.py::test_single_xor": true,
+  "set_1/test_c3.py": true,
+  "set_1/test_c4.py": true,
+  "set_1/test_c6.py": true,
+  "set_2/test_all.py": true,
+  "set_2/test_c10.py": true,
+  "set_2/test_c10.py::test_implement_cbc_mode": true,
+  "set_2/test_c9.py": true
+}
