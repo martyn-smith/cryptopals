@@ -2,5 +2,6 @@
   "test_c5.py::test_repeating_xor": true,
   "test_c6.py::test_find_key_length": true,
   "test_c6.py::test_multi_xor_decrypt": true,
-  "test_c7.py::test_AES_ECB_decrypt": true
+  "test_c7.py::test_AES_ECB_decrypt": true,
+  "test_set1.py": true
 }

@@ -1,3 +1,6 @@
+"""
+set 2 challenge 11: ECB/CBC detection oracle (from https://cryptopals.com/sets/2/challenges/11)
+"""
 import sys
 sys.path.append('..')
 from random import random, randint

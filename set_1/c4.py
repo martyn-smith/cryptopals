@@ -1,9 +1,14 @@
+"""
+set 1 challenge 4: find and break a single-char xor (from https://cryptopals.com/sets/1/challenges/4)
+
+Slightly harder than challenge 3, as you have to find the ciphered line first.
+"""
 from utils import break_single_xor
 from os.path import dirname, abspath
-print(__file__)
-filename = dirname(abspath(__file__)) + "c4.dat"
 
-def find_single_xor():
+filename = dirname(abspath(__file__)) + "/" + "c4.dat"
+
+def find_single_xor(filename = filename):
     with open(filename) as f:
         score = 0
         key = ""
@@ -20,7 +25,8 @@ def find_single_xor():
     print(f"best key is {key}, on line {best_line}.  plaintext is: \n {plaintxt} \n score is {score}")
     return (plaintxt, best_line, key, score)
 
-
+if __name__ == "__main__":
+    print(find_single_xor())
 
 
 
