@@ -9,14 +9,10 @@ Common utilities, e.g. single-character frequency analysis, are located in the d
 associated with the problem set they are first encountered in, e.g. set_1/scoring.py for 
 the above and hamming scoring.
 
-Test functions are located in each problem-set directory , and are mostly monolithic since 
-the component problems are simple and need little testing.  Utilities have a separate test
-suite.  All test files follow standard test discovery rules.
-
 Since the good folks at cryptopals have an odd fascination with "play that funky music",
 the plaintext is located at root level for easier use by all problems.
 
 ## BUILT WITH
 
-* python 3.6
+* python 3.7.2
 * pytest

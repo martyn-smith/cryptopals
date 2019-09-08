@@ -1,12 +1,3 @@
 [
-  "set_1/c1.py::test_c1",
-  "set_1/c2.py::test_c2",
-  "set_1/c3.py::test_single_xor",
-  "set_1/c4.py::test_find_single_xor",
-  "set_1/c5.py::test_repeating_xor",
-  "set_1/c6.py::test_multi_xor_decrypt",
-  "set_1/c6.py::test_find_key_length",
-  "set_1/c7.py::test_AES_ECB_decrypt",
-  "set_1/c8.py::test_find_ECB_line",
-  "set_1/scoring.py::test_hamming_distance"
+  "set_2/c13.py::test_parse"
 ]
