@@ -12,5 +12,8 @@ def b64_encoder(hexstring = hexstring):
     plaintxt = bytes.fromhex(hexstring)
     return b64encode(plaintxt)
 
+def test_c1():
+    assert b64_encoder() == b"SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
+
 if __name__ == "__main__":
     print(b64_encoder())

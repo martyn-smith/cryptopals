@@ -10,5 +10,8 @@ def fixed_XOR(message = message, key = key):
     out = bytes(a ^ b for a, b in zip(message, key))
     return bytes.hex(out)
 
+def test_c2():
+    assert fixed_XOR() == "746865206b696420646f6e277420706c6179"
+
 if __name__ == "__main__":
     print(fixed_XOR())

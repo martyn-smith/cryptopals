@@ -4,12 +4,14 @@ set 1 challenge 6:  (from https://cryptopals.com/sets/1/challenges/6)
 
 """
 from base64 import b64decode
-from scoring import freq_score, hamming_distance
-from utils import find_key_length, break_single_xor
 from unittest import mock
 from os.path import dirname, abspath
+from scoring import freq_score, hamming_distance
+from utils import find_key_length, break_single_xor
 
 filename = dirname(abspath(__file__)) + "/" + "c6.dat"
+#TODO: find a more pythonic way of accessing parent dir (i.e. "../"?)
+check_filename = dirname(abspath(__file__))[:-5] + "/" + "play_that_funky_music.txt"
 
 def multi_xor_decrypt(ciphertxt: bytes, verbose = False):
     plaintxt = "".ljust(len(ciphertxt), " ")
@@ -26,7 +28,8 @@ def multi_xor_decrypt(ciphertxt: bytes, verbose = False):
     return (plaintxt, key) if verbose else plaintxt      
 
 def test_multi_xor_decrypt():
-    with open(filename) as f, open("../play_that_funky_music.txt") as g:
+    #again, two characters are different.
+    with open(filename) as f, open(check_filename) as g:
         ciphertxt = b64decode(f.read())
         with mock.patch("builtins.input", return_value = 29):
             plaintxt = multi_xor_decrypt(ciphertxt)
@@ -34,6 +37,7 @@ def test_multi_xor_decrypt():
             assert plaintxt == test_plaintxt
 
 def test_find_key_length():
+    #this actually is broken.
     with open(filename) as f:      
         ciphertxt = b64decode(f.read())  
         key_length = find_key_length(ciphertxt, False)

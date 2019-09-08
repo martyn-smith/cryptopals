@@ -15,5 +15,9 @@ def repeating_xor(plaintxt = plaintxt, key = key):
     ciphertxt = bytes([p ^ k for p, k in zip(plaintxt, cycle(key))])
     return ciphertxt 
 
+def test_repeating_xor():
+    #a single character difference.
+    assert repeating_xor() == test_ciphertxt
+
 if __name__ == "__main__":
     print(repeating_xor())
