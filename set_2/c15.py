@@ -3,14 +3,10 @@ from utils import pad
 def validate_pad(text: bytes) -> bytes:
     pad_length = int(text[-1])
     pre_pad = text[:-pad_length]
-    try:
-        assert text[-pad_length:] == bytes([pad_length] * pad_length) 
-    except AssertionError:
-        print(f"Text {text} has been improperly padded.\nprepad: {pre_pad}") 
-    try:
-        assert len(pre_pad) + pad_length == len(text)
-    except AssertionError:
-        print(f"Text {text} has been improperly padded.\nlength:{pad_length}") 
+    assert text[-pad_length:] == bytes([pad_length] * pad_length), \
+        f"Text {text} has been improperly padded.\nprepad: {pre_pad}"
+    assert len(pre_pad) + pad_length == len(text), \
+        f"Text {text} has been improperly padded.\nlength:{pad_length}"
     return pre_pad
 
 def test_validate_pad():

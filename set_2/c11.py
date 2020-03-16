@@ -13,6 +13,7 @@ from Crypto.Cipher import AES
 from utils import pad, generate_IV, generate_key, cbc_mode, to_ascii, find_key_length
 from scoring import hamming_distance
 
+#TODO: refine test arrangements.
 KEY_SIZE = 16
 BLOCK_SIZE = 16
 
@@ -41,7 +42,7 @@ def detect_ECB_mode(ciphertxt):
     #print(blocks)
     return any(blocks.count(block) > 1 for block in blocks)
 
-def test_detect_ECB(num_samples = 1000, plaintxt_size = 48):
+def test_detect_ECB_mode(num_samples = 1000, plaintxt_size = 48):
     ECB_count = 0
     for _ in range(0, num_samples):
         known_plaintxt = bytes([0x42] * plaintxt_size)
@@ -53,5 +54,5 @@ def test_detect_ECB(num_samples = 1000, plaintxt_size = 48):
     assert 0.45 < (ECB_count / num_samples) < 0.55
 
 if __name__ == "__main__":
-    test_detect_ECB()
+    test_detect_ECB_mode()
 

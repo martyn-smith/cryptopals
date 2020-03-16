@@ -11,6 +11,7 @@ from utils import find_key_length, break_single_xor
 
 filename = dirname(abspath(__file__)) + "/" + "c6.dat"
 #TODO: find a more pythonic way of accessing parent dir (i.e. "../"?)
+#TODO: refine testing arrangements.
 check_filename = dirname(abspath(__file__))[:-5] + "/" + "play_that_funky_music.txt"
 
 def multi_xor_decrypt(ciphertxt: bytes, verbose = False):
@@ -37,9 +38,9 @@ def test_multi_xor_decrypt():
             assert plaintxt == test_plaintxt
 
 def test_find_key_length():
-    #this actually is broken.
-    with open(filename) as f:      
-        ciphertxt = b64decode(f.read())  
+    #this actually does have issues.
+    with open(filename) as f:
+        ciphertxt = b64decode(f.read())
         key_length = find_key_length(ciphertxt, False)
         assert key_length == 29
 

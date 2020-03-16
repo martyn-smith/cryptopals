@@ -10,10 +10,10 @@ filename = dirname(abspath(__file__)) + "/" + "c4.dat"
 
 def find_single_xor(filename = filename):
     with open(filename) as f:
-        score = 0
-        key = ""
         plaintxt = ""
         best_line = 0
+        key = ""
+        score = 0
         for line_num, line in enumerate(f):
             trial_ciphertxt = bytes.fromhex(line.strip())
             trial_plaintxt, line_key, line_score = break_single_xor(trial_ciphertxt, True)
@@ -31,7 +31,3 @@ def test_find_single_xor():
 
 if __name__ == "__main__":
     print(find_single_xor())
-
-
-
-        

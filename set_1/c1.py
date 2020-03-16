@@ -2,6 +2,7 @@
 set 1 challenge 1: convert hex to base 64 (https://cryptopals.com/sets/1/challenges/1).
 
 Essentially just checking you can use bytes.fromhex() and b64encode.
+And begins the cryptopals tradition of questionable song lyrics as example text.
 """
 from base64 import b64encode
 
@@ -12,7 +13,7 @@ def b64_encoder(hexstring = hexstring):
     plaintxt = bytes.fromhex(hexstring)
     return b64encode(plaintxt)
 
-def test_c1():
+def test_b64_encoder():
     assert b64_encoder() == b"SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t"
 
 if __name__ == "__main__":
