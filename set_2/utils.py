@@ -13,6 +13,13 @@ def pad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
     plaintxt = plaintxt + padding
     return plaintxt
 
+def depad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
+    pad = plaintxt[-1]
+    if plaintxt[:pad:-1].count(pad) == pad:
+        return plaintxt[:-pad]
+    #invalid padding?
+    #raise InvalidPaddingError:
+
 def generate_IV(size: int = BLOCK_SIZE) -> bytes:
     return urandom(size)
 
@@ -34,7 +41,6 @@ def cbc_mode(ciphertxt: bytes, key: bytes, IV: bytes, block_size: int = BLOCK_SI
         plaintxt_blocks.append(bytes([a ^ b for a, b in zip(cbc_block[0], cbc_block[1])]))
     plaintxt = b''.join([block for block in plaintxt_blocks])
     return plaintxt
-
 
 def find_key_length(ciphertxt: bytes, verbose = False):
     score = 0
