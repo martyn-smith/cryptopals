@@ -6,6 +6,9 @@ KEY_SIZE = 16
 MIN_KEY_LENGTH = 5
 MAX_KEY_LENGTH = 40
 
+class InvalidPaddingError(Exception):
+    pass
+
 def pad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
     #print(f"incoming length = {len(plaintxt)}")
     diff = block_length - (len(plaintxt) % block_length)
@@ -14,11 +17,14 @@ def pad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
     return plaintxt
 
 def depad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
+    if len(plaintxt) % block_length == 0:
+        return plaintxt
     pad = plaintxt[-1]
     if plaintxt[:pad:-1].count(pad) == pad:
         return plaintxt[:-pad]
-    #invalid padding?
-    #raise InvalidPaddingError:
+    else:
+        #invalid padding?
+        raise InvalidPaddingError
 
 def generate_IV(size: int = BLOCK_SIZE) -> bytes:
     return urandom(size)
