@@ -7,10 +7,9 @@ The weakness with ECB mode is that it is stateless and deterministic:
 the same block will always produce the same ciphertext.
 """
 from base64 import b64decode
-from os.path import dirname, abspath
 from Crypto.Cipher import AES
 
-filename =  dirname(abspath(__file__)) + "/" + "c8.dat"
+filename =  "c8.dat"
 key = b'0000000000000000'
 BLOCK_SIZE = 16
 

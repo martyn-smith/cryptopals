@@ -5,14 +5,13 @@ set 1 challenge 6: break repeating-key XOR (from https://cryptopals.com/sets/1/c
 """
 from base64 import b64decode
 from unittest import mock
-from os.path import dirname, abspath
 from scoring import freq_score, hamming_distance
 from utils import find_key_length, break_single_xor
 
-filename = dirname(abspath(__file__)) + "/" + "c6.dat"
+filename = "c6.dat"
 #TODO: find a more pythonic way of accessing parent dir (i.e. "../"?)
 #TODO: refine testing arrangements.
-check_filename = dirname(abspath(__file__))[:-5] + "/" + "play_that_funky_music.txt"
+check_filename = "../play_that_funky_music.txt"
 
 def multi_xor_decrypt(ciphertxt: bytes, verbose = False):
     plaintxt = "".ljust(len(ciphertxt), " ")

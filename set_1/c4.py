@@ -6,7 +6,7 @@ Slightly harder than challenge 3, as you have to find the ciphered line first.
 from os.path import dirname, abspath
 from utils import break_single_xor
 
-filename = dirname(abspath(__file__)) + "/" + "c4.dat"
+filename = "c4.dat"
 
 def find_single_xor(filename = filename):
     with open(filename) as f:
