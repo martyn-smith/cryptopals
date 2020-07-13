@@ -9,17 +9,15 @@ In this case most of the heavy lifting is offloaded to s2utils.
 #from cryptography.hazmat.primitives.ciphers.algorithms import AES
 #from cryptography.hazmat.primitives.ciphers.modes import ECB
 from base64 import b64decode
-from os.path import dirname, abspath
 from utils import cbc_mode, to_ascii, BLOCK_SIZE
 
-filename = dirname(abspath(__file__)) + "/" + "c10.dat"
-#TODO: find a more pythonic way of accessing parent dir (i.e. "../"?)
-check_filename = dirname(abspath(__file__))[:-6] + "/" + "play_that_funky_music.txt"
+filename = "c10.dat" 
+check_filename = "../play_that_funky_music.txt"
 KEY = b"YELLOW SUBMARINE"
 IV = b'\x00' * BLOCK_SIZE
 
 def store_plaintxt():
-    with open(filename) as f, open("../play_that_funky_music.txt", "w+") as g:
+    with open(filename) as f, open(check_filename, "w+") as g:
         ciphertxt = b64decode(f.read())
         plaintxt = to_ascii(cbc_mode(ciphertxt, KEY, IV))   
         print(f"writing... {plaintxt}")

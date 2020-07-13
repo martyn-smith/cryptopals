@@ -5,11 +5,10 @@ We're going to cheat a bit, initially at least: we already know it's AES with 16
 """
 from base64 import b64decode
 from itertools import combinations
-from os.path import abspath, dirname
 from Crypto.Cipher import AES
 from utils import BLOCK_SIZE, generate_key, pad, to_ascii
 
-filename = dirname(abspath(__file__)) + "/" + "c12.dat"
+filename = "c12.dat"
 key = generate_key()
 a = AES.new(key, AES.MODE_ECB)
 

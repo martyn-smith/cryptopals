@@ -1,3 +1,10 @@
+"""
+set 2 challenge 15: PKCS#7 padding validation (from https://cryptopals.com/sets/2/challenges/15)
+
+Write a function that takes a plaintext, determines if it has valid PKCS#7 padding, 
+and strips the padding off.
+"""
+
 from utils import pad
 
 def validate_pad(text: bytes) -> bytes:

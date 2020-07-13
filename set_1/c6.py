@@ -1,5 +1,5 @@
 """
-set 1 challenge 6:  (from https://cryptopals.com/sets/1/challenges/6)
+set 1 challenge 6: break repeating-key XOR (from https://cryptopals.com/sets/1/challenges/6)
 
 
 """

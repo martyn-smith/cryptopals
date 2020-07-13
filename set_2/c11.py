@@ -7,7 +7,6 @@ same time, too long a plaintext and you will have repititions even in CBC mode.
 
 48 seems to work (cribbed from the internet - 3 * 16).
 """
-from os.path import abspath, dirname
 from random import random, randint
 from Crypto.Cipher import AES
 from utils import pad, generate_IV, generate_key, cbc_mode, to_ascii, find_key_length
@@ -48,9 +47,9 @@ def test_detect_ECB_mode(num_samples = 1000, plaintxt_size = 48):
         known_plaintxt = bytes([0x42] * plaintxt_size)
         ciphertxt = encryption_oracle(known_plaintxt)
         if detect_ECB_mode(ciphertxt):
-            print("ECB mode found")
+            #print("ECB mode found")
             ECB_count += 1
-    print(ECB_count)
+    print(f"detected ECB in {ECB_count} of {num_samples} samples")
     assert 0.45 < (ECB_count / num_samples) < 0.55
 
 if __name__ == "__main__":

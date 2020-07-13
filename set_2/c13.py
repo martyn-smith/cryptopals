@@ -1,3 +1,7 @@
+"""
+set 2 challenge 13: ECB cut-and-paste (from https://cryptopals.com/sets/2/challenges/13)
+"""
+
 def parse_profile(x : str) -> dict:
     k_v_pairs = x.split("&")
     key_values = [k_v.split("=") for k_v in k_v_pairs]
