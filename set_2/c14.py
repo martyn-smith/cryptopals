@@ -31,6 +31,10 @@ def find_null_cipher() -> bytes:
         if blocks[i] == blocks[i+1]:
             return blocks[i]
 
+def find_offset():
+    msg = random_prepended_ECB(bytes(16) + bytes([0xff] * 16))
+    #return test_offsets.index(msg)
+
 class MaximumAttemptsError(Exception):
     pass
 
