@@ -23,7 +23,7 @@ def depad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
     if plaintxt[:pad:-1].count(pad) == pad:
         return plaintxt[:-pad]
     else:
-        #invalid padding?
+        #invalid padding
         raise InvalidPaddingError
 
 def generate_IV(size: int = BLOCK_SIZE) -> bytes:
