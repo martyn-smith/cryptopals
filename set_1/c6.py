@@ -9,7 +9,6 @@ from scoring import freq_score, hamming_distance
 from utils import find_key_length, break_single_xor
 
 filename = "c6.dat"
-#TODO: find a more pythonic way of accessing parent dir (i.e. "../"?)
 #TODO: refine testing arrangements.
 check_filename = "../play_that_funky_music.txt"
 
@@ -21,11 +20,9 @@ def multi_xor_decrypt(ciphertxt: bytes, verbose = False):
     for i in range(0,key_length):
         sub_block = bytes([ciphertxt[j*key_length+i] for j in range(0, repeat_length)])
         sub_plaintxt = break_single_xor(sub_block)
-        #sub_plaintxt = ''.join([chr(i) for i in sub_block])
         for j, k in enumerate(sub_plaintxt):
-            #print("0123456789012345678901234567890123456789012345678901234567890123456789")
             plaintxt = plaintxt[:(j*key_length) + i] + k + plaintxt[(j*key_length) + i + 1:]
-    return (plaintxt, key) if verbose else plaintxt      
+    return (plaintxt, key) if verbose else plaintxt
 
 def test_multi_xor_decrypt():
     #again, two characters are different.

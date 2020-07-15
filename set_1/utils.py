@@ -19,7 +19,7 @@ def break_single_xor(ciphertxt: bytes, verbose = False):
         if trial_score > score:
             score = trial_score
             key = chr(trial_key)
-            plaintxt = trial_txt        
+            plaintxt = trial_txt
     return (plaintxt, key, score) if verbose else plaintxt
 
 def find_key_length(ciphertxt: bytes, verbose = False):
@@ -35,7 +35,7 @@ def find_key_length(ciphertxt: bytes, verbose = False):
             score = trial_score
     if verbose:
         man_kl = input(f"auto-determined key length is: {key_length}\n" 
-                        "Use different key length? Type RET to continue with " 
+                        "Use different key length? Press ENTER to continue with " 
                         "auto-determined length\n")
         key_length = int(man_kl) if man_kl else key_length
     return key_length
