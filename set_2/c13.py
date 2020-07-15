@@ -21,7 +21,7 @@ def test_parse():
     assert profile == {"foo" : "bar", "baz" : "qux", "zap" : "zazzle"}
     assert unparse_profile(profile) == "foo=bar&baz=qux&zap=zazzle"
 
-def profile_for(email_addr : str):
+def profile_for(email_addr : str) -> (str, bytes):
     assert type(email_addr) == str
     email_addr = email_addr.strip("&").strip("=")
     uid=10
@@ -31,13 +31,15 @@ def profile_for(email_addr : str):
     a = AES.new(key, AES.MODE_ECB)
     return key, a.encrypt(pad(bytes(unparse_profile(profile), "utf-8")))
 
-def change_role():
+def change_role() -> str:
     key, ciphertext = profile_for("foo@bar.com")
     a = AES.new(key, AES.MODE_ECB)
     plaintext = to_ascii(depad(a.decrypt(ciphertext)))
     plaintext = plaintext.replace("user", "admin")
-    print(ciphertext)
-    print(a.encrypt(pad(bytes(plaintext, "utf-8"))))
+    return a.decrypt(a.encrypt(pad(bytes(plaintext, "utf-8"))))
+
+def test_change_role():
+    assert "role=admin" in to_ascii(depad(change_role()))
 
 if __name__ == "__main__":
-    change_role()
+    test_change_role()

@@ -17,19 +17,27 @@ with open("c17.dat") as f:
     line = choice([b64decode(line) for line in f.readlines()])
     ciphertxt = a.encrypt(pad(line))
     plaintxt = ""
-    #get the pad, should return 0x00-0x10
-    for test_char in range(0xff):
-            target = len(ciphertxt) - BLOCK_SIZE
+    def get_pad():
+        for i in range(BLOCK_SIZE):
+            target = len(ciphertxt) - (BLOCK_SIZE * 2) + i
+            test_ctxt = ciphertxt[:target] + bytes([0xff]) + ciphertxt[target+1:]
             try:
-                #print(ciphertxt)
-                #print(ciphertxt[:target] + bytes([test_char]) + ciphertxt[target+1:])
-                cbc_oracle(ciphertxt[:target] + bytes([test_char]) + ciphertxt[target+1:])
-                #test_char is valid
-                pad = ciphertxt[target] ^ (test_char ^ 1)
-                print(pad)
-                break
+                cbc_oracle(test_ctxt)
             except InvalidPaddingError:
-                continue
+                return BLOCK_SIZE - i
+    pad = get_pad()
+    # for test_char in range(0xff):
+    #         target = len(ciphertxt) - BLOCK_SIZE
+    #         try:
+    #             #print(ciphertxt)
+    #             #print(ciphertxt[:target] + bytes([test_char]) + ciphertxt[target+1:])
+    #             cbc_oracle(ciphertxt[:target] + bytes([test_char]) + ciphertxt[target+1:])
+    #             #test_char is valid
+    #             pad = ciphertxt[target] ^ (test_char ^ 1)
+    #             print(pad)
+    #             break
+    #         except InvalidPaddingError:
+    #             continue
     # for i in range(len(ciphertxt)):
     #     #print(f"testing... {i}")
     #     for test_char in range(0xff):

@@ -14,7 +14,7 @@ def pad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
     padding = bytes([diff] * diff)
     return plaintxt + padding
 
-def depad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
+def depad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
     pad = plaintxt[-1]
     if pad > block_size or plaintxt[-pad:].count(pad) != pad:
         raise InvalidPaddingError
