@@ -23,7 +23,7 @@ def cbc(plaintxt):
 def ecb(plaintxt):
     #print(f"encrypting... {plaintxt}")
     a = AES.new(generate_key(), AES.MODE_ECB)
-    return a.decrypt(pad(plaintxt))
+    return a.encrypt(pad(plaintxt))
 
 def encryption_oracle(plaintxt: bytes):
     """

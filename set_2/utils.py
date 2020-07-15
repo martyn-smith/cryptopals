@@ -9,22 +9,16 @@ MAX_KEY_LENGTH = 40
 class InvalidPaddingError(Exception):
     pass
 
-def pad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
-    #print(f"incoming length = {len(plaintxt)}")
-    diff = block_length - (len(plaintxt) % block_length)
-    padding = diff.to_bytes(1, byteorder = "big") * diff
-    plaintxt = plaintxt + padding
-    return plaintxt
+def pad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
+    diff = block_size - (len(plaintxt) % block_size)
+    padding = bytes([diff] * diff)
+    return plaintxt + padding
 
 def depad(plaintxt: bytes, block_length: int = BLOCK_SIZE) -> bytes:
-    if len(plaintxt) % block_length == 0:
-        return plaintxt
     pad = plaintxt[-1]
-    if plaintxt[:pad:-1].count(pad) == pad:
-        return plaintxt[:-pad]
-    else:
-        #invalid padding
+    if pad > block_size or plaintxt[-pad:].count(pad) != pad:
         raise InvalidPaddingError
+    return plaintxt[:-pad]
 
 def generate_IV(size: int = BLOCK_SIZE) -> bytes:
     return urandom(size)
@@ -35,7 +29,6 @@ def generate_key(size: int = KEY_SIZE) -> bytes:
 def to_ascii(text: bytes) -> str:
     #pretty certain there's a more standard way of doing this.
     return "".join(chr(i) for i in text)
-    #return ''.join([bytes([char]).decode("ascii", "backslashreplace") for char in text])
 
 def cbc_mode(ciphertxt: bytes, key: bytes, IV: bytes, block_size: int = BLOCK_SIZE) -> bytes:
     ciphertxt = pad(IV + ciphertxt, block_size)
