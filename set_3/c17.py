@@ -1,4 +1,6 @@
-""" ... generate a random AES key (which it should save for all future encryptions), 
+""" 
+Vaudenay's attack.
+Generate a random AES key (which it should save for all future encryptions), 
 pad the string out to the 16-byte AES block size and CBC-encrypt it under that key, providing the caller the ciphertext and IV.
 """
 
@@ -16,16 +18,32 @@ def cbc_oracle(ciphertxt):
 with open("c17.dat") as f:
     line = choice([b64decode(line) for line in f.readlines()])
     ciphertxt = a.encrypt(pad(line))
-    plaintxt = ""
-    def get_pad():
-        for i in range(BLOCK_SIZE):
-            target = len(ciphertxt) - (BLOCK_SIZE * 2) + i
-            test_ctxt = ciphertxt[:target] + bytes([0xff]) + ciphertxt[target+1:]
-            try:
-                cbc_oracle(test_ctxt)
-            except InvalidPaddingError:
-                return BLOCK_SIZE - i
-    pad = get_pad()
+
+print(len(ciphertxt))
+plaintxt = []
+for i in range(BLOCK_SIZE):
+    pos = BLOCK_SIZE+i
+    for test_char in range(0xff): 
+        ciphertxt = ciphertxt[:-pos] + bytes([test_char]) + ciphertxt[-pos+1:]
+        try:
+            cbc_oracle(ciphertxt)
+            if test_char ^ (i+1) <= 0x7f:
+                plaintxt.insert(0, chr(test_char))
+                print(plaintxt)
+                break
+        except InvalidPaddingError:
+            continue
+    # plaintxt = ""
+    # def get_pad():
+    #     for i in range(BLOCK_SIZE):
+    #         target = len(ciphertxt) - (BLOCK_SIZE * 2) + i
+    #         test_ctxt = ciphertxt[:target] + bytes([0xff]) + ciphertxt[target+1:]
+    #         try:
+    #             cbc_oracle(test_ctxt)
+    #         except InvalidPaddingError:
+    #             return BLOCK_SIZE - i
+    # pad = get_pad()
+    # print(f"{pad=}")
     # for test_char in range(0xff):
     #         target = len(ciphertxt) - BLOCK_SIZE
     #         try:
@@ -38,15 +56,15 @@ with open("c17.dat") as f:
     #             break
     #         except InvalidPaddingError:
     #             continue
-    # for i in range(len(ciphertxt)):
-    #     #print(f"testing... {i}")
-    #     for test_char in range(0xff):
-    #         target = len(ciphertxt) - BLOCK_SIZE - i
-    #         try:
-    #             cbc_oracle(ciphertxt[:target] + bytes([test_char]) + ciphertxt[target+1:])
-    #             #test_char is valid
-    #             plaintxt += chr((test_char ^ i+1) ^ ciphertxt[target + BLOCK_SIZE - 1])
-    #             break
-    #         except InvalidPaddingError:
-    #             continue
+    # # for i in range(len(ciphertxt)):
+    # #     print(f"testing... {i}")
+    # #     for test_char in range(0xff):
+    # #         target = len(ciphertxt) - BLOCK_SIZE - i
+    # #         try:
+    # #             cbc_oracle(ciphertxt[:target] + bytes([test_char]) + ciphertxt[target+1:])
+    # #             #test_char is valid
+    # #             plaintxt += chr((test_char ^ i+1) ^ ciphertxt[target + BLOCK_SIZE - 1])
+    # #             break
+    # #         except InvalidPaddingError:
+    # #             continue
     # print(plaintxt[::-1])
