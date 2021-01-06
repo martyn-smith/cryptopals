@@ -25,8 +25,8 @@ def break_single_xor(ciphertxt: bytes, verbose = False):
 def find_key_length(ciphertxt: bytes, verbose = False):
     score = 0
     for trial_key_length in range(MIN_KEY_LENGTH, MAX_KEY_LENGTH+1):
-        trial_score = (hamming_distance(ciphertxt[0:trial_key_length], 
-                                        ciphertxt[trial_key_length:(2*trial_key_length)]) 
+        chunks = [ciphertxt[i*trial_key_length:(i+1)*trial_key_length] for i in range(len(ciphertxt) // trial_key_length - 1)]
+        trial_score = (sum(hamming_distance(i, j) for i, j in zip(chunks[:-1], chunks[1:]))
                         / trial_key_length)
         if verbose:
             print(f"{trial_key_length}\t{trial_score:.3f}")

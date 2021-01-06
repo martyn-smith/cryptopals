@@ -14,11 +14,12 @@ def pad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
     padding = bytes([diff] * diff)
     return plaintxt + padding
 
-def depad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
+def depad(plaintxt: bytes, block_size: int = BLOCK_SIZE - 1) -> bytes:
     pad = plaintxt[-1]
+    print(f"{pad=}")
     if pad > block_size or plaintxt[-pad:].count(pad) != pad:
         raise InvalidPaddingError
-    #print(f"valid pad: {plaintxt[-pad:]}")
+    print(f"valid pad: {plaintxt[-pad:]}")
     return plaintxt[:-pad]
 
 def generate_IV(size: int = BLOCK_SIZE) -> bytes:

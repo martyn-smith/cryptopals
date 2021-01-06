@@ -42,8 +42,8 @@ def ECB_bytewise_decrypt():
         return plaintxt
 
 def test_ECB_bytewise_decrypt():
-    assert ECB_bytewise_decrypt() == \
-"""
+    assert ECB_bytewise_decrypt()[:-1] == \
+"""\
 Rollin' in my 5.0
 With my rag-top down so my hair can blow
 The girlies on standby waving just to say hi

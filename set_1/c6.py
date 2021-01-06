@@ -39,7 +39,7 @@ def test_find_key_length():
     #this actually does have issues.
     with open(filename) as f:
         ciphertxt = b64decode(f.read())
-        key_length = find_key_length(ciphertxt, True)
+        key_length = find_key_length(ciphertxt, False)
         assert key_length == 29
 
 if __name__ == "__main__":
