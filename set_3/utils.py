@@ -9,6 +9,9 @@ MAX_KEY_LENGTH = 40
 class InvalidPaddingError(Exception):
     pass
 
+class FailedDecryptionError(Exception):
+    pass
+
 def pad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
     diff = block_size - (len(plaintxt) % block_size)
     padding = bytes([diff] * diff)
@@ -16,10 +19,10 @@ def pad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
 
 def depad(plaintxt: bytes, block_size: int = BLOCK_SIZE - 1) -> bytes:
     pad = plaintxt[-1]
-    print(f"{pad=}")
+    #print(f"{pad=}")
     if pad > block_size or plaintxt[-pad:].count(pad) != pad:
         raise InvalidPaddingError
-    print(f"valid pad: {plaintxt[-pad:]}")
+    #print(f"valid pad: {plaintxt[-pad:]}")
     return plaintxt[:-pad]
 
 def generate_IV(size: int = BLOCK_SIZE) -> bytes:
