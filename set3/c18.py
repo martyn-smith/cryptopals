@@ -9,9 +9,9 @@ nonce = b"\x00" * BLOCK_SIZE
 def ctr_mode(key, nonce):
     a = AES.new(key)
     while True:
-        nonce = nonce[:8] + bytes([nonce[8] + 1]) + nonce[8:] 
         yield a.encrypt(nonce)
+        nonce = nonce[:BLOCK_SIZE//2] + bytes([nonce[BLOCK_SIZE//2] + 1]) + nonce[(BLOCK_SIZE//2)+1:]
 
-ctr = ctr_mode(key, nonce)
-for chunk in make_chunks(ciphertxt):
-    print(to_ascii(ciphertxt ^ next(ctr)))
+print("".join(
+        ["".join([chr(c ^ i) for c, i in zip(chunk, ctr)]) 
+            for chunk, ctr in zip(make_chunks(ciphertxt), ctr_mode(key, nonce))]))
