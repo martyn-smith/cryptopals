@@ -17,7 +17,7 @@ def pad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
     padding = bytes([diff] * diff)
     return plaintxt + padding
 
-def depad(plaintxt: bytes, block_size: int = BLOCK_SIZE - 1) -> bytes:
+def depad(plaintxt: bytes, block_size: int = BLOCK_SIZE) -> bytes:
     pad = plaintxt[-1]
     #print(f"{pad=}")
     if pad > block_size or plaintxt[-pad:].count(pad) != pad:
@@ -34,3 +34,6 @@ def generate_key(size: int = KEY_SIZE) -> bytes:
 def to_ascii(text: bytes) -> str:
     #pretty certain there's a more standard way of doing this.
     return "".join(chr(i) for i in text)
+
+def make_chunks(ciphertxt: str, chunk_size = BLOCK_SIZE) -> list:
+    return [ciphertxt[i*BLOCK_SIZE:(i+1)*BLOCK_SIZE] for i in range(len(ciphertxt) // BLOCK_SIZE)]
