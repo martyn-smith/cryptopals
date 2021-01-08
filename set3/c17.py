@@ -51,8 +51,6 @@ def decrypt_chunk(test_chunk, target_chunk):
                 break
         if not success:
             print(f"failed decryption at pos {i}")
-    #print(len(intermediate))
-    #print(len(test_chunk))
     return "".join([chr(i ^ c) for i, c in zip(intermediate, test_chunk)])
 
 print("".join([decrypt_chunk(c1, c2) for (c1, c2) in zip(chunks[:-1], chunks[1:]) ]))
