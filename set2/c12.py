@@ -41,14 +41,5 @@ def ECB_bytewise_decrypt():
         print(f"no matches for block {block_count}, quitting. \n")
         return plaintxt
 
-def test_ECB_bytewise_decrypt():
-    assert ECB_bytewise_decrypt()[:-1] == \
-"""\
-Rollin' in my 5.0
-With my rag-top down so my hair can blow
-The girlies on standby waving just to say hi
-Did you stop? No, I just drove by
-"""
-
 if __name__ == "__main__":
     print(ECB_bytewise_decrypt())

@@ -38,8 +38,5 @@ def change_role() -> str:
     plaintext = plaintext.replace("user", "admin")
     return a.decrypt(a.encrypt(pad(bytes(plaintext, "utf-8"))))
 
-def test_change_role():
-    assert "role=admin" in to_ascii(depad(change_role()))
-
 if __name__ == "__main__":
-    test_change_role()
+    print(to_ascii(depad(change_role())))

@@ -12,7 +12,6 @@ from base64 import b64decode
 from utils import cbc_mode, to_ascii, BLOCK_SIZE
 
 filename = "c10.dat" 
-check_filename = "../play_that_funky_music.txt"
 KEY = b"YELLOW SUBMARINE"
 IV = b'\x00' * BLOCK_SIZE
 
@@ -28,12 +27,6 @@ def implement_cbc_mode():
         ciphertxt = b64decode(f.read())
         plaintxt = to_ascii(cbc_mode(ciphertxt, KEY, IV))
         return plaintxt
-
-def test_implement_cbc_mode():
-    with open(check_filename) as g:
-        plaintxt = implement_cbc_mode()
-        test_plaintxt = g.read()
-        assert plaintxt[:16] == test_plaintxt[:16]
 
 if __name__ == "__main__":
     print(implement_cbc_mode())

@@ -24,8 +24,5 @@ def bitflip_cbc():
     new_plaintxt = "".join([chr(i) for i in a.decrypt(ciphertext)])
     return find_admin_string(new_plaintxt)
 
-def test_bitflip_cbc():
-    assert(bitflip_cbc)
-
 if __name__ == "__main__":
     print(bitflip_cbc())

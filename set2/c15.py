@@ -15,16 +15,3 @@ def validate_pad(text: bytes) -> bytes:
     assert len(pre_pad) + pad_length == len(text), \
         f"Text {text} has been improperly padded.\nlength:{pad_length}"
     return pre_pad
-
-def test_validate_pad():
-    #correct
-    validate_pad(b"ICE ICE BABY\x04\x04\x04\x04")
-    #incorrect
-    try:
-        validate_pad(b"ICE ICE BABY\x05\x05\x05\x05")
-        validate_pad(b"ICE ICE BABY\x01\x02\x03\x04")
-    except AssertionError:
-        pass
-
-if __name__ == "__main__":
-    test_validate_pad()
