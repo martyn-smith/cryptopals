@@ -22,11 +22,7 @@ def find_ECB_line(filename = filename, key = key):
         for line_num, line in enumerate(f):
             if detect_ECB_mode(b64decode(line)):           
                 print(f"line number {line_num} may be encrypted in ECB mode.  line is:\n {line}")
-                return line_num
-
-def test_find_ECB_line():
-    line_num = find_ECB_line() 
-    assert line_num == 132 
+                return line_num 
 
 if __name__ == "__main__":
     print(find_ECB_line())

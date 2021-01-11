@@ -13,10 +13,5 @@ def single_xor(ciphertxt = ciphertxt):
     plaintxt, __, score = break_single_xor(ciphertxt, True)
     return plaintxt, score
 
-def test_single_xor():
-    plaintxt, score = single_xor()
-    assert plaintxt == "cooking mc's like a pound of bacon"
-    assert score == 153
-
 if __name__ == "__main__":
     print(single_xor())

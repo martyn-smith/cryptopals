@@ -25,9 +25,5 @@ def find_single_xor(filename = filename):
     print(f"best key is {key}, on line {best_line}.  plaintext is: \n {plaintxt} \n score is {score}")
     return (plaintxt, best_line, key, score)
 
-def test_find_single_xor():
-    plaintxt, __, __, __ = find_single_xor()
-    assert plaintxt == "now that the party is jumping\n"
-
 if __name__ == "__main__":
     print(find_single_xor())
