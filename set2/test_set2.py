@@ -35,7 +35,7 @@ def test_challenge_13():
 def test_challenge_14():
     from c14 import ECB_bytewise_decrypt
     assert ECB_bytewise_decrypt() == \
-"""
+"""\
 Rollin' in my 5.0
 With my rag-top down so my hair can blow
 The girlies on standby waving just to say hi

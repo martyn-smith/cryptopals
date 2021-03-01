@@ -1,6 +1,6 @@
 # CRYPTOPALS
 
-A simple attempt at the problems posed by the [cryptopals](https://cryptopals.com) website.
+A simple attempt at the problems posed on the [cryptopals](https://cryptopals.com) website.
 
 Each problem has a python file associated with it in the directory associated with the 
 set that problem is in, e.g. set_1/c1.py for the very first problem. Each set is self-contained.
