@@ -1,5 +1,5 @@
 """
-CBC bitflipping attacks (from https://cryptopals.com/sets/2/challenges/16)
+set 2 challenge 16: CBC bitflipping attacks (from https://cryptopals.com/sets/2/challenges/16)
 
 """
 

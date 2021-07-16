@@ -1,3 +1,6 @@
+"""
+set 3 challenge 18: implement AES-CTR mode.
+"""
 from base64 import b64decode
 from Crypto.Cipher import AES
 from utils import BLOCK_SIZE, make_chunks, to_ascii
@@ -7,7 +10,7 @@ key = b"YELLOW SUBMARINE"
 nonce = b"\x00" * BLOCK_SIZE
 
 def ctr_mode(key, nonce):
-    a = AES.new(key)
+    a = AES.new(key, AES.MODE_ECB)
     while True:
         yield a.encrypt(nonce)
         nonce = nonce[:BLOCK_SIZE//2] + bytes([nonce[BLOCK_SIZE//2] + 1]) + nonce[(BLOCK_SIZE//2)+1:]

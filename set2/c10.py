@@ -4,7 +4,8 @@ set 2 challenge 10: Implement CBC mode (from https://cryptopals.com/sets/2/chall
 In CBC mode, each ciphertext block is added to the next plaintext block before the next
 call to the cipher core.  (The 1st block has an IV).
 
-In this case most of the heavy lifting is offloaded to s2utils.
+Naturally, we could call AES.MODE_CBC, but that's missing the point.
+However, in this case most of the heavy lifting is offloaded to utils.
 """
 #from cryptography.hazmat.primitives.ciphers.algorithms import AES
 #from cryptography.hazmat.primitives.ciphers.modes import ECB

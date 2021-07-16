@@ -1,5 +1,5 @@
 """ 
-Vaudenay's attack.
+set 3 challenge 17: the CBC padding oracle, or Vaudenay's attack.
 Generate a random AES key (which it should save for all future encryptions), 
 pad the string out to the 16-byte AES block size and CBC-encrypt it under that key, providing the caller the ciphertext and IV.
 """
@@ -12,11 +12,11 @@ from utils import BLOCK_SIZE, generate_key, generate_IV, pad, depad, InvalidPadd
 # from targets import cbc_oracle
 
 key, IV = generate_key(), generate_IV()
-a = AES.new(key, AES.MODE_CBC, IV)
 
 def cbc_oracle(ciphertxt):
+    d = AES.new(key, AES.MODE_CBC, IV)
     try:
-        depad(a.decrypt(ciphertxt))
+        depad(d.decrypt(ciphertxt))
         return True
     except InvalidPaddingError:
         return False
@@ -28,12 +28,6 @@ def make_pad(intermediate: bytes) -> bytes:
         pad = bytes([l ^ int(i)]) + pad
     #print(f"padded {intermediate} to {pad}")
     return pad
-
-with open("c17.dat") as f:
-    line = choice([b64decode(line) for line in f.readlines()])
-    ciphertxt = a.encrypt(pad(line))
-    chunks = make_chunks(ciphertxt)
-    assert chunks[-1] == ciphertxt[-BLOCK_SIZE:]
 
 def decrypt_chunk(test_chunk, target_chunk):
     assert len(test_chunk) == len(target_chunk)
@@ -53,4 +47,10 @@ def decrypt_chunk(test_chunk, target_chunk):
             print(f"failed decryption at pos {i}")
     return "".join([chr(i ^ c) for i, c in zip(intermediate, test_chunk)])
 
-print("".join([decrypt_chunk(c1, c2) for (c1, c2) in zip(chunks[:-1], chunks[1:]) ]))
+with open("c17.dat") as f:
+    line = choice([b64decode(line) for line in f.readlines()])
+    a = AES.new(key, AES.MODE_CBC, IV)
+    ciphertxt = a.encrypt(pad(line))
+    chunks = make_chunks(ciphertxt)
+    assert chunks[-1] == ciphertxt[-BLOCK_SIZE:]
+    print("".join([decrypt_chunk(c1, c2) for (c1, c2) in zip(chunks[:-1], chunks[1:]) ]))
