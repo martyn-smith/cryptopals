@@ -6,6 +6,7 @@ Using the function from #12, with a random count of random bytes prepended to ev
 AES-128-ECB(random-prefix || attacker-controlled || target-bytes, random-key)
 
 ...assume random no more than 16? 128?
+TODO: currently the only failure from set2.
 """
 
 from base64 import b64decode
