@@ -47,10 +47,14 @@ def decrypt_chunk(test_chunk, target_chunk):
             print(f"failed decryption at pos {i}")
     return "".join([chr(i ^ c) for i, c in zip(intermediate, test_chunk)])
 
-with open("c17.dat") as f:
-    line = choice([b64decode(line) for line in f.readlines()])
-    a = AES.new(key, AES.MODE_CBC, IV)
-    ciphertxt = a.encrypt(pad(line))
-    chunks = make_chunks(ciphertxt)
-    assert chunks[-1] == ciphertxt[-BLOCK_SIZE:]
-    print("".join([decrypt_chunk(c1, c2) for (c1, c2) in zip(chunks[:-1], chunks[1:]) ]))
+def vaudenay():
+    with open("c17.dat") as f:
+        line = choice([b64decode(line) for line in f.readlines()])
+        a = AES.new(key, AES.MODE_CBC, IV)
+        ciphertxt = a.encrypt(pad(line))
+        chunks = make_chunks(ciphertxt)
+        assert chunks[-1] == ciphertxt[-BLOCK_SIZE:]
+        return "".join([decrypt_chunk(c1, c2) for (c1, c2) in zip(chunks[:-1], chunks[1:]) ])
+
+if __name__ == "__main__":
+    print(vaudenay())
