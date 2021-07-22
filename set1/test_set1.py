@@ -1,4 +1,4 @@
-test_filename = "../play_that_funky_music.txt"
+test_filename = "../data/play_that_funky_music.txt"
 
 def test_challenge_1():
     from c1 import b64_encoder

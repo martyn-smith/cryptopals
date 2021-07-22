@@ -26,3 +26,7 @@ def test_challenge_21():
 # 2563451924
 # 0670094950
 # 1914837113
+
+def test_challenge_22():
+    from c22 import crack
+    assert crack() is not None
